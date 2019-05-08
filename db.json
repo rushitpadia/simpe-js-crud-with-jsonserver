@@ -1,0 +1,94 @@
+{
+  "students": [
+    {
+      "id": 10,
+      "rollNo": "119",
+      "name": "Mehul"
+    },
+    {
+      "id": 11,
+      "rollNo": "120",
+      "name": "Advaith"
+    },
+    {
+      "id": 12,
+      "rollNo": "121",
+      "name": "Advay"
+    },
+    {
+      "id": 13,
+      "rollNo": "122",
+      "name": "Advik"
+    },
+    {
+      "id": 14,
+      "rollNo": "123",
+      "name": "Agastya"
+    },
+    {
+      "id": 15,
+      "rollNo": "124",
+      "name": "Akshay"
+    },
+    {
+      "id": 17,
+      "rollNo": "126",
+      "name": "Anay"
+    },
+    {
+      "id": 18,
+      "rollNo": "127",
+      "name": "Anirudhnew"
+    },
+    {
+      "id": 20,
+      "rollNo": "129",
+      "name": "Ansh"
+    },
+    {
+      "id": 22,
+      "rollNo": "131",
+      "name": "Arjun"
+    },
+    {
+      "id": 25,
+      "rollNo": "134",
+      "name": "Atharv"
+    },
+    {
+      "id": 26,
+      "rollNo": "135",
+      "name": "Ayaan"
+    },
+    {
+      "id": 27,
+      "rollNo": "136",
+      "name": "Ayush"
+    },
+    {
+      "rollNo": 137,
+      "name": "Rushit",
+      "id": 28
+    },
+    {
+      "rollNo": 117,
+      "name": "Abhoday",
+      "id": 29
+    },
+    {
+      "rollNo": 115,
+      "name": "james christian",
+      "id": 30
+    },
+    {
+      "rollNo": 116,
+      "name": "Krishna",
+      "id": 31
+    },
+    {
+      "rollNo": 114,
+      "name": "Laksh",
+      "id": 32
+    }
+  ]
+}
