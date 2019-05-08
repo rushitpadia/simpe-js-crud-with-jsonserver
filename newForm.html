@@ -1,0 +1,111 @@
+<html>
+
+<head>
+    <script type="text/javascript">
+        const id = parseInt(localStorage.getItem("studentid"));
+        let test = parseInt(0);
+        if (id != 0) {
+            fetch(`http://localhost:3000/students/${id}`)
+                .then(response => {
+                    response.json().then(json => {
+                        document.getElementById("sNumber").disabled = true;
+                        console.log(":Response json:", json);
+                        document.getElementById("sName").value = json.name;
+                        document.getElementById("sNumber").value = json.rollNo;
+                        document.getElementById("SaveDetails").value = "Update information";
+                        test = 1;
+                        //document.getElementById("SaveDetails").onclick = validation();
+                    });
+                });
+        }
+ 
+        function validation() {
+            const name = document.querySelector('input[name="sName"]').value;
+            const rno = parseInt(document.querySelector('input[name="sNumber"]').value);
+            let num = parseInt(0);
+            if (test == 1) {
+                patchData(`http://localhost:3000/students/${id}`, { "name": name }).then(data => console.log(JSON.stringify(data))).catch(error => console.error(error));
+                alert("Data Updated.");
+                window.location = "Fetch_fake_server.html";
+            }
+            else {
+                fetch('http://localhost:3000/students?rollNo=' + rno).then(r => {
+                    r.json().then(json => {
+                        if (json.length > 0) {
+                            alert("Already exist.");
+                            //document.write(num);
+                            return false;
+                        }
+                        else {
+                            postData(`http://localhost:3000/students`, { "rollNo": rno, "name": name }).then(data => console.log(JSON.stringify(data))).catch(error => console.error(error));
+                            alert("Data Inserted.");
+                            window.location = "Fetch_fake_server.html";
+
+                        }
+
+                    });
+                });
+                //document.write(num);
+            }
+        }
+        function patchData(url = ``, data = {}) {
+            return fetch(url, {
+                method: "PATCH",
+                mode: "cors",
+                cache: "no-cache",
+                credentials: "same-origin",
+                headers: {
+                    "Content-Type": "application/JSON",
+                },
+                redirect: "follow",
+                referrer: "no-referrer",
+                body: JSON.stringify(data),
+            })
+                .then(Response => Response.json());
+        }
+
+        function postData(url = ``, data = {}) {
+            return fetch(url, {
+                method: "POST",
+                mode: "cors",
+                cache: "no-cache",
+                credentials: "same-origin",
+                headers: {
+                    "Content-Type": "application/JSON",
+                },
+                redirect: "follow",
+                referrer: "no-referrer",
+                body: JSON.stringify(data),
+            })
+                .then(Response => Response.json());
+        }
+    </script>
+    <title>Student form</title>
+</head>
+
+<body>
+    <form>
+        <table>
+            <tr>
+                <td colspan="2">
+                    <h2>Student Form</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>Name :</td>
+                <td><input type="text" name="sName" id="sName" placeholder="Provide your Name." required /></td>
+            </tr>
+            <tr>
+                <td>RollNo. :</td>
+                <td><input type="text" name="sNumber" id="sNumber" placeholder="Provide your Roll number." required />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="button" value="Submit Information" id="SaveDetails"
+                        onclick="validation()" /></td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

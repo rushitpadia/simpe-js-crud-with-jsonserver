@@ -1,0 +1,54 @@
+<html>
+
+<head>
+    <title>Fetching from server - example</title>
+    <link rel="stylesheet" href="main.css">
+    <script type="text/javascript">
+    let clr=parseInt(1);
+        fetch('http://localhost:3000/students').then(r => {
+            r.json().then(json => {
+
+                json.forEach(student => {
+                    localStorage.setItem("studentid", 0);
+                    const row = "<tr id='color"+clr+"'><td  class='tooltip'>" + student.rollNo + "<span class='tooltiptext'>"+student.rollNo+"<br>"+student.name+"</td><td>" + student.name + "</span></td><td><input type='button' value='Edit' onclick='UpdateData(" + student.id + ")'/><input type='button' value='Delete' onclick='DeleteData(" + student.id + ");document.location.reload(true)'/></td></tr>";
+                    document.getElementById("studentTable").innerHTML += row;
+                    clr=clr+1;
+                    if(clr>2){
+                        clr=1;
+                    }
+                });
+            });
+        });
+        function UpdateData(studentId) {
+            localStorage.setItem("studentid", studentId);
+            window.location = "newForm.html";
+        }
+        function DeleteData(studentId) {
+            return fetch(`http://localhost:3000/students/` + studentId, {
+                method: "DELETE",
+                mode: "cors",
+                cache: "no-cache",
+                credentials: "same-origin",
+                headers: {
+                    "Content-Type": "application/JSON",
+                },
+                redirect: "follow",
+                referrer: "no-referrer",
+            });
+
+        }
+    </script>
+</head>
+
+<body align="center">
+    <a id="studentFormAnchor" href="newForm.html"><input type="button" value="New Student" /></a>
+    <table border="2" style="text-align: center" id="studentTable">
+        <tr id="headerTr">
+            <td><b>Roll No</b></td>
+            <td><b>Name</b></td>
+            <td><b>Action</b></td>
+        </tr>
+    </table>
+</body>
+
+</html>
